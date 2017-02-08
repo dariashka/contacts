@@ -1,0 +1,59 @@
+body {
+    background-color: rgba(240, 240, 240, 0.5);
+    padding: 20px 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+    background-color: rgba(145, 168, 209, 0.5);
+}
+
+.form .input-group {
+    margin: 10px 0px;
+}
+
+#address-input {
+    margin: 10px 0px;
+    height: 122px;
+}
+
+.save-button {
+    float: right;
+    margin-top: 10px;
+}
+
+.search {
+    margin: 20px 0px;
+}
+
+.contact {
+    margin: 20px 0px;
+    background-color: rgba(145, 168, 209, 0.2);
+    padding: 10px 0px;
+}
+
+.contact .btn {
+    float: right;
+    margin-right: -15px;
+    margin-top: -10px;
+}
+
+.contact input {
+    margin: 5px 0px;
+}
+
+.contact .right input {
+    height: 122px;
+}
+
+.input-group-addon {
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+}
+
+.contact input {
+    background-color: rgba(145, 168, 209, 0.3);
+    border: 0px;
+    box-shadow: none;
+}

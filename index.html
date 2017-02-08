@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-touch.min.js"></script>
+
+    <script src="app.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container" ng-app="ContactsApp" ng-init="list=[
+            {
+        name: 'Иванов Иван Иванович',
+        email: 'ivanov@mail.ru',
+        mobile: '+79998881111',
+        address: 'г. Томск, ул. Шишкова, д. 13, офис 307'
+    }, {
+        name: 'Ольгова Лариса Ивановна',
+        email: 'olgova@mail.ru',
+        mobile: '+79998881111',
+        address: 'г. Томск, ул. Шишкова, д. 13, офис 307'
+    }, {
+        name: 'Николаев Михаил Николаевич',
+        email: 'nikolaev@mail.ru',
+        mobile: '+79998881111',
+        address: 'г. Томск, ул. Шишкова, д. 13, офис 307'
+    }, {
+        name: 'Бондарчук Богдан Тихомирович',
+        email: 'bondarchuk@mail.ru',
+        mobile: '+79998881111',
+        address: 'г. Томск, ул. Шишкова, д. 13, офис 307'
+    }]" ng-controller="contactController">
+
+
+        <button ng-hide="showAdd" class="btn" ng-click="toggle()">Создать контакт</button>
+        <div class="form row" ng-show="showAdd">
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon">ФИО</span>
+                    <input class="col-xs-8 form-control" type="text" id="name" ng-model="name" placeholder="ФИО" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">E-mail</span>
+                    <input class="col-xs-8 form-control" type="text" id="email" ng-model="email" placeholder="E-mail" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Телефон</span>
+                    <input class="col-xs-8 form-control" type="text" id="mobile" ng-model="mobile" placeholder="Телефон" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="">
+                    <input type="text" id="address-input" class="form-control" ng-model="address" placeholder="Адрес" />
+                </div>
+            </div>
+            <button class="btn save-button" ng-click="add(); toggle();">Сохранить</button>
+        </div>
+        <div class="search input-group">
+            <span class="input-group-addon">Поиск</span>
+            <input class="form-control" ng-model="searchText">
+        </div>
+        <div class="contact row" ng-repeat="contact in list | filter:searchText">
+            <div class="left col-sm-6">
+                <input class="col-xs-12 form-control" type="text" placeholder="ФИО" ng-value="contact.name" />
+                <input class="col-xs-12 form-control" type="text" placeholder="E-mail" value="{{contact.email}}" />
+                <input class="col-xs-12 form-control" type="text" placeholder="Телефон" value="{{contact.mobile}}" />
+
+            </div>
+            <div class="right col-sm-6">
+                <input class="col-xs-12 form-control" type="text" placeholder="Адрес" value="{{contact.address}}" />
+
+                <button type="button" class="close" ng-click="delete(contact)"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

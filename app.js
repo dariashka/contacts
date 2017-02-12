@@ -10,7 +10,12 @@
                  mobile: $contact.mobile,
                  address: $contact.address
              });
+             $contact.name = '';
+             $contact.email = '';
+             $contact.mobile = '';
+             $contact.address = '';
          }
+
      }
 
      $contact.showAdd = false;

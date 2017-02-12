@@ -21,4 +21,9 @@
          var index = $contact.list.indexOf(item);
          $contact.list.splice(index, 1);
      }
+     $contact.hideModal = function () {
+         angular.element($('.modal-backdrop')).removeClass('in');
+         angular.element($('.modal-backdrop')).addClass('out');
+         angular.element($('.modal-backdrop')).css('z-index', -1500);
+     }
         }]);

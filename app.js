@@ -1,34 +1,49 @@
- var ContactsApp = angular.module('ContactsApp', []);
+var contactsApp = angular.module('contactsApp', ['ngStorage']);
+contactsApp.controller('contactsCtrl', function ($scope, $http, $localStorage) {
+	$scope.$storage = $localStorage.$default({
+		"contacts": []
+	});
+	$http.get('contacts.txt').then(function (res) {
+		$localStorage.contacts = res.data;
+	});
+	$scope.contacts = $localStorage.contacts;
 
- ContactsApp.controller('contactController', ['$scope', function ($contact, $window) {
-     $contact.add = function () {
-         if (angular.isDefined($contact.name) && $contact.name != '' && $contact.price != '') {
+	console.log("Локальное хранилище: ", $localStorage.contacts);
+	console.log($scope.contacts);
 
-             $contact.list.splice(0, 0, {
-                 name: $contact.name,
-                 email: $contact.email,
-                 mobile: $contact.mobile,
-                 address: $contact.address
-             });
-             $contact.name = '';
-             $contact.email = '';
-             $contact.mobile = '';
-             $contact.address = '';
-         }
+	$scope.delete = function (item) {
+		var index = $scope.contacts.indexOf(item);
+		$scope.contacts.splice(index, 1);
+		angular.element($('.modal-backdrop')).removeClass('in');
+		angular.element($('.modal-backdrop')).addClass('out');
+		angular.element($('.modal-backdrop')).css('z-index', -1500);
+		$localStorage.contacts = $scope.contacts;
+		console.log($localStorage.contacts);
+	}
+	$scope.showAdd = false;
 
-     }
+	$scope.toggle = function () {
+		$scope.showAdd = !$scope.showAdd;
+	};
 
-     $contact.showAdd = false;
-     $contact.toggle = function () {
-         $contact.showAdd = !$contact.showAdd;
-     };
-     $contact.delete = function (item) {
-         var index = $contact.list.indexOf(item);
-         $contact.list.splice(index, 1);
-     }
-     $contact.hideModal = function () {
-         angular.element($('.modal-backdrop')).removeClass('in');
-         angular.element($('.modal-backdrop')).addClass('out');
-         angular.element($('.modal-backdrop')).css('z-index', -1500);
-     }
-        }]);
+	$scope.add = function () {
+		if (angular.isDefined($scope.name) && $scope.name != '' && $scope.price != '') {
+			$scope.contacts.splice(0, 0, {
+				name: $scope.name,
+				email: $scope.email,
+				mobile: $scope.mobile,
+				address: $scope.address
+			});
+			$scope.name = '';
+			$scope.email = '';
+			$scope.mobile = '';
+			$scope.address = '';
+			$localStorage.contacts = $scope.contacts;
+			console.log($localStorage.contacts);
+			console.log($scope.contacts);
+		}
+	}
+	$scope.saveChanges = function () {
+		$localStorage.contacts = $scope.contacts;
+	}
+});

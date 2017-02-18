@@ -6,6 +6,7 @@
 Бакланова Дарья
 *email:* darya.baklanova@gmail.com
 *телефон*: +7 (923) 4338969
+[Обо мне](http://qqcky.github.io/dbaklanova/)
 
 ## Разработка
 Были использованы фреймворки **Bootstrap** и **AngularJS**.
